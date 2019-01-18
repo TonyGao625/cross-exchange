@@ -18,7 +18,7 @@ namespace XOProject.Services.Exchange
         {
             return await EntityRepository
                 .Query()
-                .Where(x => x.Symbol.Equals(symbol))
+                .Where(x => x.Symbol.Equals(symbol)).Distinct()
                 .ToListAsync();
         }
 

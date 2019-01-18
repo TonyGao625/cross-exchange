@@ -23,12 +23,13 @@ namespace XOProject.Api.Controller
         [HttpGet("daily/{symbol}/{year}/{month}/{day}")]
         public async Task<IActionResult> Daily([FromRoute] string symbol, [FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
         {
-            // TODO: Add implementation for the daily summary
+            var dayDateTime = new DateTime(year, month, day);
+            var analyticsPrice = await _analyticsService.GetDailyAsync(symbol, dayDateTime);
             var result = new DailyModel()
             {
                 Symbol = symbol,
-                Day = new DateTime(),
-                Price = Map(new AnalyticsPrice())
+                Day = dayDateTime,
+                Price = Map(analyticsPrice)
             };
 
             return Ok(result);
@@ -37,13 +38,13 @@ namespace XOProject.Api.Controller
         [HttpGet("weekly/{symbol}/{year}/{week}")]
         public async Task<IActionResult> Weekly([FromRoute] string symbol, [FromRoute] int year, [FromRoute] int week)
         {
-            // TODO: Add implementation for the weekly summary
+            var analyticsPrice = await _analyticsService.GetWeeklyAsync(symbol, year, week);
             var result = new WeeklyModel()
             {
                 Symbol = symbol,
                 Year = year,
                 Week = week,
-                Price = Map(new AnalyticsPrice())
+                Price = Map(analyticsPrice)
             };
 
             return Ok(result);
@@ -52,13 +53,13 @@ namespace XOProject.Api.Controller
         [HttpGet("monthly/{symbol}/{year}/{month}")]
         public async Task<IActionResult> Monthly([FromRoute] string symbol, [FromRoute] int year, [FromRoute] int month)
         {
-            // TODO: Add implementation for the monthly summary
+            var analyticsPrice = await _analyticsService.GetMonthlyAsync(symbol, year, month);
             var result = new MonthlyModel()
             {
                 Symbol = symbol,
                 Year = year,
                 Month = month,
-                Price = Map(new AnalyticsPrice())
+                Price = Map(analyticsPrice)
             };
 
             return Ok(result);

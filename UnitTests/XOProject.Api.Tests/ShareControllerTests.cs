@@ -33,7 +33,7 @@ namespace XOProject.Api.Tests
             var hourRate = new HourlyShareRateModel
             {
                 Symbol = "CBI",
-                Rate = 330.0M,
+                Rate = 330.10M,
                 TimeStamp = new DateTime(2018, 08, 17, 5, 0, 0)
             };
 
